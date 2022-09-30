@@ -2,7 +2,7 @@
 
 //---------------------------------
 
-// Ex25();
+Ex25();
 // Задача 25: Используя определение степени числа, напишите цикл, который принимает на вход два натуральных числа (A и B) и возводит число A в степень B.
 // 3, 5 -> 243 (3⁵)
 // 2, 4 -> 16
@@ -37,7 +37,7 @@ void Ex25()
 
 //---------------------------------
 
-// Ex27();
+/Ex27();
 // Задача 27: Напишите программу, которая принимает на вход число и выдаёт сумму цифр в числе.
 // 452 -> 11
 // 82 -> 10
@@ -95,10 +95,53 @@ Ex29();
 
 void Ex29()
 {
+    int sizeArray = 8;
+    int[] numbers = new int[sizeArray];
 
+    FillArray(numbers);
+    Console.Write("Массив до сортировки: ");
+    PrintArray(numbers);
+    SelectionSort(numbers);
+    Console.Write("Массив после сортировки: ");
+    PrintArray(numbers);
 
+    void FillArray(int[] num1)
+    {
+        Random random = new Random();
+        for (int i = 0; i < num1.Length; i++)
+        {
+            num1[i] = random.Next(-99, 100);
+        }
+    }
 
-    Console.WriteLine("");
+    void PrintArray(int[] num2)
+    {
+        for (int i = 0; i < num2.Length; i++)
+        {
+            Console.Write(num2[i] + " ");
+        }
+        Console.WriteLine();
+    }
+
+    void SelectionSort(int[] num3)
+    {
+        for (int i = 0; i < num3.Length - 1; i++) //<array.Length - 1> - здесь <-1>, потому что ниже в цикле <int j = i + 1> (это нужно, чтобы искусственно сократить длину массива).
+        {
+            int minPosition = i; // через переменную определяем позицию, с которой будем работать. Здесь позиция - это <i> (индекс).
+
+            for (int j = i + 1; j < num3.Length; j++) // <int j = i+1> - чтобы начать с неотсортированной части (а отсортированную не трогать, поэтому <i+1>>).
+            {
+                if (Math.Abs(num3[j]) < Math.Abs(num3[minPosition])) // здесь ищем минимальный элемент по модулю. 
+                {
+                    minPosition = j;
+                }
+            }
+
+            int temporary = num3[i]; // для запоминания той позиции, с которой мы работали (чтобы в дальнейшем поменять значение минимальной позиции с той позицией, которую мы нашли).
+            num3[i] = num3[minPosition]; // для обмена двух переменных местами.
+            num3[minPosition] = temporary; // для обмена двух переменных местами.
+        }
+    }
 }
 
 //---------------------------------
