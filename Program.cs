@@ -32,7 +32,6 @@ void Ex25()
         result *= numberA;
     }
     Console.WriteLine($"{numberA} в степени {numberB} = {result}");
-    Console.WriteLine("");
 }
 
 //---------------------------------
